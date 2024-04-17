@@ -1,25 +1,25 @@
 "use client";
 
 import { useState,useEffect } from "react";
+import { toast } from "sonner";
 export default function Home() {
-  const [ipAddress,setIpAddress] = useState("");
+  const [ipAddress,setIpAddress] = useState("144.39.206.197");
   const [geoInfo,setGeoInfo] = useState(null);
 
-  const [cordinates,setLocation] = useState("");
   useEffect(()=>{
 
-    getVisitorIP();
+    fetchGeoInfo();
   },[]);
 
-  const getVisitorIP = async ()=>{
-    try {
-      const response =await fetch("https://api.ipify.org");
-      const data = await response.text();
-        setIpAddress(data);
-    } catch (error) {
-      console.log("Failed to fetch IP: " ,error);
-    }
-  };
+  // const getVisitorIP = async ()=>{
+  //   try {
+  //     const response =await fetch("https://api.ipify.org");
+  //     const data = await response.text();
+  //       setIpAddress(data);
+  //   } catch (error) {
+  //     console.log("Failed to fetch IP: " ,error);
+  //   }
+  // };
 
   const fetchGeoInfo = async ()=>{
     if (!ipAddress) return;  // Guard clause if no IP address is present
@@ -33,9 +33,10 @@ export default function Home() {
         setGeoInfo(data);
       }
       else{
-        console.log("Fail")
+        toast.error("Fail to retive current location")
       }
     } catch (error) {
+      toast.error("Fail to get Location Info: ")
       console.log("Fail to get Location Info: ", error);
     }
   };
