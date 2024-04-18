@@ -42,19 +42,18 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <div className="flex justify-center items-center min-h-screen">
-          {ipAddress && <p>Your IP address is {ipAddress}</p>}
-          <button 
+    <div className="flex-1 w-full flex flex-col gap-10 items-center">
+        {geoInfo && (
+        <div className="bg-yellow-500 text-white text-center p-4 mb-4">
+            <p>Geo Information: {geoInfo.country}, {geoInfo.city}, {geoInfo.regionName}, {geoInfo.timezone}</p>
+        </div>
+        )}
+        <button 
           className="px-6 py-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
           onClick={fetchGeoInfo}
-          >
-              Show Me My Location
-          </button>
-          {geoInfo && <p>Geo Information: {geoInfo.country}, {geoInfo.city}, {geoInfo.regionName}, {geoInfo.timezone}</p>}
-        </div>
+        >
+          Show Me My Location
+        </button>
     </div>
-    </main>
   );
 }

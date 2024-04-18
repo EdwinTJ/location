@@ -8,17 +8,22 @@ export default async function Navbar() {
       data: { user },
     } = await supabase.auth.getUser()
     return(
-        <div className="flex items-center gap-4">
-        <Link href={"/"}>Home</Link>
-        <Link href={"/account"}>Account</Link>
-        <div>
-           { user ?  
-         (  <form action="/auth/signout" method="post">
-                <button className="button block" type="submit">
+        <div className="w-full">
+          <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
+            <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
+              <Link href={"/"}>Home</Link>
+              <Link href={"/account"}>Account</Link>
+              <div>
+                { user ?  
+                (  
+                <form action="/auth/signout" method="post">
+                  <button className="button block" type="submit">
                     Sign out
-                </button>
-            </form>) : ( <Link href={"/login"}>Login</Link>)}
-        </div>
+                  </button>
+                </form>) : ( <Link href={"/login"}>Login</Link>)}
+              </div>
+            </div>
+          </nav>
         </div>
     )
   }

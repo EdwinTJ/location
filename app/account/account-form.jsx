@@ -63,62 +63,58 @@ export default function AccountForm({ user }) {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-    <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-     <p>Your account information</p>
-     <div className="form-widget">
-      <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={user?.email} disabled />
+    <div className="flex-1 w-full flex flex-col items-center p-6 space-y-6">
+    <h2 className="text-lg font-semibold">Your Account Information</h2>
+    <div className="w-full max-w-lg p-4 bg-white shadow-md rounded-lg space-y-4">
+      <div className="form-item">
+        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+        <input id="email" type="text" value={user?.email} disabled className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
       </div>
-      <div>
-        <label htmlFor="fullName">Full Name</label>
+      <div className="form-item">
+        <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">Full Name</label>
         <input
           id="fullName"
           type="text"
-          value={fullname || ''}
+          value={fullname}
           onChange={(e) => setFullname(e.target.value)}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
       </div>
-      <div>
-        <label htmlFor="username">Username</label>
+      <div className="form-item">
+        <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
         <input
           id="username"
           type="text"
-          value={username || ''}
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
       </div>
-      <div>
-        <label htmlFor="website">Website</label>
+      <div className="form-item">
+        <label htmlFor="website" className="block text-sm font-medium text-gray-700">Website</label>
         <input
           id="website"
           type="url"
-          value={website || ''}
+          value={website}
           onChange={(e) => setWebsite(e.target.value)}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
       </div>
-
-      <div>
+      <div className="space-y-2">
         <button
-          className="button primary block"
-          onClick={() => updateProfile({ fullname, username, website, avatar_url })}
+          className={`w-full py-2 px-4 rounded-lg font-medium shadow-sm text-white ${loading ? 'bg-gray-500' : 'bg-blue-600 hover:bg-blue-700'} focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}
+          onClick={updateProfile}
           disabled={loading}
         >
           {loading ? 'Loading ...' : 'Update'}
         </button>
-      </div>
-
-      <div>
         <form action="/auth/signout" method="post">
-          <button className="button block" type="submit">
+          <button className="w-full py-2 px-4 rounded-lg font-medium shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50" type="submit">
             Sign out
           </button>
         </form>
       </div>
     </div>
-    </div>
-  </main>
-   
+  </div>
   )
 }
