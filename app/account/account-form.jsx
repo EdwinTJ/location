@@ -7,8 +7,6 @@ export default function AccountForm({ user }) {
   const [loading, setLoading] = useState(true)
   const [fullname, setFullname] = useState(null)
   const [username, setUsername] = useState(null)
-  const [website, setWebsite] = useState(null)
-  const [avatar_url, setAvatarUrl] = useState(null)
 
   const getProfile = useCallback(async () => {
     try {
@@ -16,7 +14,7 @@ export default function AccountForm({ user }) {
 
       const { data, error, status } = await supabase
         .from('profiles')
-        .select(`full_name, username, website, avatar_url`)
+        .select(`full_name, username`)
         .eq('id', user?.id)
         .single()
 
@@ -27,8 +25,6 @@ export default function AccountForm({ user }) {
       if (data) {
         setFullname(data.full_name)
         setUsername(data.username)
-        setWebsite(data.website)
-        setAvatarUrl(data.avatar_url)
       }
     } catch (error) {
       alert('Error loading user data!')
@@ -41,7 +37,7 @@ export default function AccountForm({ user }) {
     getProfile()
   }, [user, getProfile])
 
-  async function updateProfile({ username, website, avatar_url }) {
+  async function updateProfile({ username }) {
     try {
       setLoading(true)
 
@@ -49,8 +45,6 @@ export default function AccountForm({ user }) {
         id: user?.id,
         full_name: fullname,
         username,
-        website,
-        avatar_url,
         updated_at: new Date().toISOString(),
       })
       if (error) throw error
@@ -90,16 +84,7 @@ export default function AccountForm({ user }) {
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
       </div>
-      <div className="form-item">
-        <label htmlFor="website" className="block text-sm font-medium text-gray-700">Website</label>
-        <input
-          id="website"
-          type="url"
-          value={website}
-          onChange={(e) => setWebsite(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        />
-      </div>
+
       <div className="space-y-2">
         <button
           className={`w-full py-2 px-4 rounded-lg font-medium shadow-sm text-white ${loading ? 'bg-gray-500' : 'bg-blue-600 hover:bg-blue-700'} focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}
