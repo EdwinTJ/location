@@ -1,7 +1,7 @@
 import { createClient } from '@/util/supabase/server'
 import Location from "@/app/Location/page" 
 import Link from 'next/link'
-import Card from '@/components/Card'
+import CardComponent from '@/components/Card'
 export default async function Home() {
   const supabase = createClient()
 
@@ -13,7 +13,7 @@ export default async function Home() {
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <div >
         <Location/>
-          {user ? <Card/>:<><Link href={"/login"}>Login</Link></>}  
+          {user ? <CardComponent/>:<><Link href={"/login"}>Login</Link></>}  
             </div>
       </main>
   )
