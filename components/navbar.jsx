@@ -12,15 +12,17 @@ export default async function Navbar() {
           <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
             <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
               <Link href={"/"}>Home</Link>
-              <Link href={"/account"}>Account</Link>
               <div>
                 { user ?  
-                (  
+                ( 
+                  <>
+                  <Link href={"/account"}>Account</Link>
                 <form action="/auth/signout" method="post">
                   <button className="button block" type="submit">
                     Sign out
                   </button>
-                </form>) : ( <Link href={"/login"}>Login</Link>)}
+                </form></>) : 
+                ( <Link href={"/login"}>Login</Link>)}
               </div>
             </div>
           </nav>
