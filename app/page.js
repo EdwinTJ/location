@@ -8,11 +8,12 @@ export default async function Home() {
   const {
     data: { user },
   } = await supabase.auth.getUser()
+
   return (
 
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <div >
-        <Location/>
+        <Location user={user}/>
           {user ? <CardComponent/>:<><Link href={"/login"}>Login</Link></>}  
             </div>
       </main>
