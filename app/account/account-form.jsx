@@ -1,7 +1,7 @@
 'use client'
 import { useCallback, useEffect, useState } from 'react'
 import { createClient } from '@/util/supabase/client'
-
+import { toast } from 'sonner'
 export default function AccountForm({ user }) {
   const supabase = createClient()
   const [loading, setLoading] = useState(true)
@@ -27,7 +27,7 @@ export default function AccountForm({ user }) {
         setUsername(data.username)
       }
     } catch (error) {
-      alert('Error loading user data!')
+      toast.error('Error loading user data!')
     } finally {
       setLoading(false)
     }
@@ -48,9 +48,9 @@ export default function AccountForm({ user }) {
         updated_at: new Date().toISOString(),
       })
       if (error) throw error
-      alert('Profile updated!')
+      toast.success('Profile updated!')
     } catch (error) {
-      alert('Error updating the data!')
+      toast.error('Error updating the data!')
     } finally {
       setLoading(false)
     }
