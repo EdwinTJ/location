@@ -20,10 +20,15 @@ export default async function CardComponent(){
     .from("placesvisited")
     .select("*")
     .eq("user_id", user.id)
-    
+    .order('id', { ascending: false }) // Order by created_at in descending order
+    .limit(3);
     if(error){
-        toast.error("Something went wrong... Try again")
-    }
+        return (
+            <div className="mt-10 flex justify-center items-center h-full">
+              <div className='text-red-700'>"Something went wrong... Try again"</div>
+            </div>
+          );
+        }
 
     return(
         <div className='mt-6'>
